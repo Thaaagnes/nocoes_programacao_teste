@@ -5,17 +5,36 @@
     </head>
     <body bgcolor="#9370DB">
         <form action="" method="POST">
-            <center>    
+            <center> 
+                <label style="color:white;">Nome: </label><br>
+                <input type="text" name="nome" required><br> 
+
+                <label style="color:white;">Sobrenome: </label><br>
+                <input type="text" name="sobrenome" required><br>
+
+                <label style="color:white;">Idade: </label><br>
+                <input type="number" name="idade" required><br>
+
+                <label style="color:white;">Data: </label><br>
+                <input type="date" name="data" required><br>
+
+                <label style="color:white;">Peso: </label><br>
+                <input type="number" name="peso" required><br>
+
                 <label style="color:white;" >Cidade: </label><br>
                 <input type="text" name="cidade" required><br>
 
                 <label style="color:white;">Estado: </label><br>
-                <input type="text" name="estado" required><br>
+                <input type="text" name="estado" required><br><br>
                 <button type="submit">Enviar</button>
             </center>
         </form>
         <center>
-        <?php
+       
+       <?php
+
+        print_r($_POST);
+
         class pessoa_obj{};
 
 
@@ -24,7 +43,7 @@
         $pessoa->sobrenome = "Doe";
         $pessoa->idade = 0.5;
         $pessoa->date = '01/01/2022';
-        $pessoa->peso = '0.8';
+        $pessoa->peso = 8;
         $pessoa->cidade = "Florínea";
         $pessoa->estado = "SP";
 
@@ -34,51 +53,51 @@
         $pessoa2->idade = 22;
         $pessoa2->date = '09/06/2000';
         $pessoa2->peso = '75';
-        $pessoa->cidade = "Tarumã";
-        $pessoa->estado = "SP";
+        $pessoa2->cidade = "Tarumã";
+        $pessoa2->estado = "SP";
         
         $pessoa3 = new pessoa_obj();
         $pessoa3->name = "Kauan";
         $pessoa3->sobrenome = "Borsoi";
         $pessoa3->idade = 19;
         $pessoa3->date = '04/06/2003';
-        $pessoa3->peso = '74';
-        $pessoa->cidade = "Tarumã";
-        $pessoa->estado = "SP";
+        $pessoa3->peso = 68;
+        $pessoa3->cidade = "Tarumã";
+        $pessoa3->estado = "SP";
 
-        print_r($pessoa);
-        echo "<Br><br>";
-        print_r($pessoa2);
-        echo "<br>";
-        print_r($pessoa3);
-        echo "<Br>";
+        // print_r($pessoa);
+        // echo "<Br><br>";
+        // print_r($pessoa2);
+        // echo "<br>";
+        // print_r($pessoa3);
+        // echo "<Br>";
 
         $arrayPessoas = array();
-        echo "<br>O meu array de pessoas: <br>";
-        print_r($arrayPessoas);
+        function inserirPessoaNaLista($arrayPessoas,$item){
+            $pessoa = new pessoa_obj();
+            $pessoa->name = $item['nome'];
+            $pessoa->sobrenome = $item['sobrenome'];
+            $pessoa->idade = $item['idade'];
+            $pessoa->date = $item['data'];
+            $pessoa->peso = $item['peso'];
+            $pessoa->cidade = $item['cidade'];
+            $pessoa->estado = $item['estado'];
+
+            array_push($arrayPessoas, $pessoa);
+            return $arrayPessoas;
+        }
+
+        // echo "<br>O meu array de pessoas: <br>";
+        // print_r($arrayPessoas);
         array_push($arrayPessoas, $pessoa);
         array_push($arrayPessoas, $pessoa2);
         array_push($arrayPessoas, $pessoa3);
         
         echo "<br><br><pre>";
-        print_r($arrayPessoas);
+        // print_r($arrayPessoas);
         echo "</pre><br><br>";
 
-        echo"<table border='1'>";
-        for ($posicao=0; $posicao < count($arrayPessoas); $posicao++) { 
-            if($arrayPessoas[$posicao]->idade > 0.4) {
-                echo"<tr>";
-                echo "<td>". $arrayPessoas[$posicao]->name."</td>";
-                echo "<td>". $arrayPessoas[$posicao]->sobrenome."</td>";
-                echo "<td>". $arrayPessoas[$posicao]->idade."</td>";
-                echo "<td>". $arrayPessoas[$posicao]->date."</td>";
-                echo "<td>". $arrayPessoas[$posicao]->peso."</td>";
-                echo"</tr>";
-            }
-            
-            
-        }
-        echo"</table>";
+       
         
         //echo"<br>";
         //for ($posicao=count($arrayPessoas)-1; $posicao > -1; $posicao--) { 
@@ -91,22 +110,42 @@
             }else if($_POST['estado'] == ""){
                 echo "Sr Usuário, o campo estado não foi preenchido.";
             }else{
+                $arrayPessoas = inserirPessoaNaLista($arrayPessoas,$_POST);
                 echo "Dados Cadastrados com Sucesso";
             }
         }
+
+        echo"<table border='1'>";
+        for ($posicao=0; $posicao < count($arrayPessoas); $posicao++) { 
+            if($arrayPessoas[$posicao]->idade > 0) {
+                echo"<tr>";
+                echo "<td>". $arrayPessoas[$posicao]->name."</td>";
+                echo "<td>". $arrayPessoas[$posicao]->sobrenome."</td>";
+                echo "<td>". $arrayPessoas[$posicao]->idade."</td>";
+                echo "<td>". $arrayPessoas[$posicao]->date."</td>";
+                echo "<td>". $arrayPessoas[$posicao]->peso."</td>";
+                echo "<td>". $arrayPessoas[$posicao]->cidade."</td>";
+                echo "<td>". $arrayPessoas[$posicao]->estado."</td>";
+                echo"</tr>";
+            }
+            
+            
+        }
+        echo"</table>";
+
         ?>
         
-        <table border="1"><br><br>              <!-- inicando a tabela -->
-            <tr>                        <!-- iniciando a linha -->
-                <td>Cidade:</td>        <!-- iniciando e fechando uma coluna -->
-                <td>Estado:</td>        <!-- iniciando e fechando uma coluna -->
-            </tr>                       <!-- fechando a linha -->
-            <tr>                        <!-- iniciando a linha -->
-                <td>Tarumã</td>         <!-- iniciando e fechando uma coluna -->
-                <td>SP</td>             <!-- iniciando e fechando uma coluna -->
-            </tr>                       <!-- fechando a linha -->
+        <!-- <table border="1"><br><br>              inicando a tabela -->
+            <!-- <tr>                        iniciando a linha -->
+                <!-- <td>Cidade:</td>        iniciando e fechando uma coluna -->
+                <!-- <td>Estado:</td>        iniciando e fechando uma coluna -->
+            <!-- </tr>                       fechando a linha -->
+            <!-- <tr>                        iniciando a linha -->
+                <!-- <td>Tarumã</td>         iniciando e fechando uma coluna -->
+                <!-- <td>SP</td>             iniciando e fechando uma coluna -->
+            <!-- </tr>                       fechando a linha -->
 
-        </table>                        <!-- fechando a tabela -->
+        <!-- </table>                        fechando a tabela -->
         </center>
         
     </body>
