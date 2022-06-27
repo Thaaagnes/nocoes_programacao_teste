@@ -19,22 +19,42 @@
         </div>
     </nav>
 
-    <form action="" method="POST"> 
+    <form class="form-control" action="" method="POST"> 
         <center>    
                 <label>Nome: </label><br>
-                <input type="text" name="nome" required><br>
+                <input class="form-control" type="text" name="nome" required><br>
 
                 <label>Cargo: </label><br>
-                <input type="text" name="cargo" required><br>
+                <input class="form-control" type="text" name="cargo" required><br>
 
                 <label>Salário: </label><br>
-                <input type="text" name="salario" required><br>
+                <input class="form-control" type="number" name="salario" required><br>
 
                 <label>Descrição: </label><br>
-                <input type="text" name="descricao" required><br><br>
+                <input class="form-control" type="text" name="descricao" required><br><br>
 
-                <button type="submit">Salvar/Gravar</button>
+                <button class="form-control btn btn-success" type="submit">Salvar/Gravar</button>
         </center>
     </form>
+    <?php
+        $nomeServidor = "localhost";
+        $database = "database";
+        $usuario = "root";
+        $senha = "";
+
+        //criar a conexão
+        $conexao = mysqli_connect($nomeServidor, $usuario, $senha, $database);
+
+        //checagem de conexão
+        if(!$conexao){
+            die("Conexão falhou: ".mysqli_connect_error());
+        }else{
+            echo "Conexão com Sucesso!";
+        }
+
+        
+
+    ?>
+
 </body>
 </html>

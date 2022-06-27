@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Sistema novo</title>
+    <title>Bootstrap demo</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
   </head>
   <body>
@@ -46,6 +46,7 @@
             <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
             <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
             <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3" aria-label="Slide 4"></button>
     </div>
             <div class="carousel-inner">
             <div class="carousel-item active">
@@ -67,6 +68,13 @@
             <div class="carousel-caption d-none d-md-block">
                 <h5>Fim de tarde</h5>
                 <p>"Você não pode alterar seu destino."</p>
+            </div>
+            </div>
+            <div class="carousel-item">
+            <img src="Imagens/ceu.png" class="d-block" width="100%" height="500px" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>Nova Imagem</h5>
+                <p>"Encontrar um texto."</p>
             </div>
             </div>
         </div>
