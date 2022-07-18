@@ -46,7 +46,7 @@
         function selectFuncionarios(){
             $conexao = conexao();
             //executar o comando desejado
-            $comando = "SELECT * FROM FUNCIONARIOS";
+            $comando = "SELECT * FROM FUNCIONARIOS ORDER BY NOME";
             $resultado_comando = mysqli_query($conexao, $comando) or die('Erro no envio do comando: '.$comando." ".mysqli_error($conexao));
             //exibir os dados da nossa tabela
            return $resultado_comando;
@@ -82,6 +82,7 @@
 
                 if(isset($_GET['id'])){
                     deletar($_GET['id']);
+                    header("Location: funcionarios.php");
                 }
 
                 while($indice = mysqli_fetch_array($funcionarios)){

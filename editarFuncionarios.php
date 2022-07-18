@@ -19,6 +19,76 @@
         </div>
     </nav>
 
-</body>
+    <?php
+       function conexao(){
+        $nomeServidor = "localhost";
+        $database = "database";
+        $usuario = "root";
+        $senha = "";
+
+        //criar a conexão
+        $conexao = mysqli_connect($nomeServidor, $usuario, $senha, $database);
+
+        //checagem de conexão
+        if(!$conexao){
+            die("Conexão falhou: ".mysqli_connect_error());
+        }else{
+            echo "Conexão com Sucesso!";
+        }
+        return $conexao;
+        }
+
+        function selectFuncionarios($id){
+          $conexao = conexao();
+          //executar o comando desejado
+          $comando = "SELECT * FROM FUNCIONARIOS WHERE ID = $id";
+          $resultado_comando = mysqli_query($conexao, $comando) or die('Erro no envio do comando: '.$comando." ".mysqli_error($conexao));
+          //exibir os dados da nossa tabela
+         return $resultado_comando;
+
+      }
+
+        function atualizarFuncionario($id, $nome, $cargo, $salario, $descricao){
+            $conexao = conexao();
+            $comando = "UPDATE FUNCIONARIOS SET NOME = '$nome', CARGO = '$cargo', SALARIO = $salario, DESCRICAO = '$descricao' WHERE ID = $id";
+            $resultado_comando = mysqli_query($conexao, $comando) or die('Erro no envio do comando: '.$comando." ".mysqli_error($conexao));
+          //exibir os dados da nossa tabela
+         return $resultado_comando;
+        }
+
+        if(isset($_POST['nome']) && isset($_POST['cargo']) && isset($_POST['salario']) && isset($_POST['descricao'])){
+            atualizarFuncionario($_GET['id'], $_POST['nome'], $_POST['cargo'], $_POST['salario'], $_POST['descricao']);
+            header("Location: funcionarios.php");
+        }
+
+        $funcionario = selectFuncionarios($_GET['id']);
+        print_r($funcionario);
+        ?>
+
+    <form class="form-control" action="" method="POST"> 
+        <center>    
+                <?php while($indice = mysqli_fetch_array($funcionario)){ ?>
+
+                <label>Nome: </label><br>
+                <input class="form-control" type="text" name="nome" required value = "<?php echo $indice['nome']; ?>"><br>
+
+                <label>Cargo: </label><br>
+                <input class="form-control" type="text" name="cargo" required value = "<?php echo $indice['cargo']; ?>"><br>
+
+                <label>Salário: </label><br>
+                <input class="form-control" type="number" name="salario" required value = "<?php echo $indice['salario']; ?>"><br>
+
+                <label>Descrição: </label><br>
+                <input class="form-control" type="text" name="descricao" required value = "<?php echo $indice['descricao']; ?>"><br><br>
+
+                <?php } ?>
+                <button class="form-control btn btn-success" type="submit">Salvar/Gravar</button>
+        
+        </center>
+    </form>
+
+    
+
+ </body>
 
   </html>

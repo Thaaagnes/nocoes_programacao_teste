@@ -69,6 +69,7 @@
         if(isset($_POST['nome'])){
             print_r($_POST);
             inserir($_POST['nome'],$_POST['cargo'],$_POST['salario'],$_POST['descricao']);
+            header("Location: funcionarios.php");
         }
         
 
